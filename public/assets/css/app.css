@@ -35,9 +35,6 @@
     position: relative;
 }
 
-.product img{
-    max-height: 350px;
-    max-width: 525px;
-    width: 525px;
-    height: 350px;
+.add-to-cart{
+    cursor: pointer;
 }

@@ -19,18 +19,18 @@ $('.delete-image').on('click', function (e){
 
 //Получение всех продуктов
 $.ajax({
-    url: 'api/products',
+    url: '/api/products',
     type: 'GET',
     dataType: "json",
     success: function (data){
         $.each(data, function (index, product){
             let productHTML =  '<div class="col-sm col-md-6 col-lg"><div class="product">' +
                 '<a href="/product/'+product.id+'" class="img-prod">' +
-                '<img class="img-fluid" src="storage/'+product.cover+'" alt="'+product.title+'">' +
+                '<img class="img-fluid" src="http://seadigital/storage/'+product.cover+'" alt="'+product.title+'">' +
                 '<div class="overlay"></div>' +
                 '</a>' +
                 '<div class="text py-3 px-3">' +
-                '<h3><a href="#">'+product.title+'</a></h3>' +
+                '<h3><a href="http://seadigital/product/'+product.id+'">'+product.title+'</a></h3>' +
                 '<div class="d-flex">' +
                 '<div class="pricing">' +
                 '<p class="price"><span class="mr-2 price-dc">$'+product.price+'</span></p>' +
@@ -46,7 +46,7 @@ $.ajax({
                 '</div>' +
                 '</div>' +
                 '<p class="bottom-area d-flex px-3">' +
-                '<a class="add-to-cart text-center py-2 mr-1" onclick="addToCart('+ product.id+','+ true +')"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>' +
+                '<a class="add-to-cart text-center py-2 mr-1 cursor-pointer" onclick="addToCart('+ product.id+','+ true +')"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>' +
                 '<a href="#" class="buy-now text-center py-2">Buy now<span><i class="ion-ios-cart ml-1"></i></span></a>' +
                 '</p>' +
                 '</div>' +
@@ -61,12 +61,14 @@ $('#countCart').append('[' + countCart + ']')
 
 // Добавление товара в корзину
 function addToCart(id, isSingle){
-    let qty = isSingle ? 1 : $('#inputbuy').val();
+    console.log(id);
+    let qty = isSingle ? 1 : parseInt($('#quantity').val()) || 1;
+    console.log(qty);
 
     let index = cart.findIndex(productInCart => productInCart.id === id);
 
     $.ajax({
-        url: 'api/product/'+id,
+        url: '/api/product/'+id,
         success: function (res){
             let newProduct = [
                 {
@@ -74,6 +76,8 @@ function addToCart(id, isSingle){
                     "title": res.title,
                     "price": res.price,
                     "size": res.size,
+                    "description": res.description,
+                    "img": res.cover,
                     "qty": qty
                 }
             ];
@@ -86,8 +90,23 @@ function addToCart(id, isSingle){
             localStorage.setItem('cart', JSON.stringify(cart));
             let count = cart.reduce((qty, product) => qty + product.qty, 0)
 
-            $('#countCart').replaceWith('<a href="{{route(\'cart\')}}" class="nav-link" id="countCart"><span class="icon-shopping_cart"></span>'
+            $('#countCart').replaceWith('<a href="http://seadigital/cart" class="nav-link" id="countCart"><span class="icon-shopping_cart"></span>'
                 +'[' + count + ']'+'</a>')
         }
     })
 }
+
+
+// удаляем продукт из localStorage
+function removeProduct(id){
+    let cart = JSON.parse(localStorage.getItem('cart'))
+    cart.splice(id, 1);
+    localStorage.setItem('cart', JSON.stringify(cart))
+    let subtotal = cart.reduce((sum, product) => sum + product.price * product.qty, 0);
+    $('#subtotal').replaceWith('<span id="subtotal">$'+subtotal+'</span>')
+    let discount = $('#discount').text().replace("$", "");
+    $('#total').replaceWith('<span id="subtotal">$'+(subtotal-discount)+'</span>')
+    $('#cartList tr:eq('+id+')').remove();
+}
+
+

@@ -21,9 +21,11 @@ Route::get('/cart', function (){
     return view('cart');
 })->name('cart');
 
-Route::get('/product/{id}', function (){
-    return view('product-single');
-})->name('product');
+Route::get('/product/{id}', '\App\Http\Controllers\Store\ProductController@index')->name('product');
+
+Route::get('/shop', function (){
+    return view('shop');
+})->name('shop');
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', function (){

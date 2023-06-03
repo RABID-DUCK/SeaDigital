@@ -34,7 +34,7 @@
                     <div class="input-group">
                         <input type="file" class="form-control w-25 @error('cover') is-invalid @enderror" name="cover" value="{{old('cover')}}">
                     </div>
-                    <img src="http://seadigital/storage/app/public/{{$product->cover}}" width="250" height="100">
+                    <img src="{{asset('storage/'.$product->cover)}}" width="250" height="100">
                 </div>
                 <div class="form-group">
                     <label>Картинки</label>
@@ -43,7 +43,7 @@
                     </div>
                     @foreach($product->images as $image)
                     <div data-key="{{$image->id}}" class="block-images">
-                        <img src="{{asset('storage/'.$product->cover)}}" width="250" height="100">
+                        <img src="{{asset('storage/'.$image->file_path)}}" width="250" height="100">
                         <span>{{$image->file_path}}</span>
                         <i class="delete-image">X</i>
                     </div>
