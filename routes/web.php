@@ -37,8 +37,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/', '\App\Http\Controllers\Products\ProductController@index')->name('product.index');
         Route::get('/show/{product}', '\App\Http\Controllers\Products\ProductController@show')->name('product.show');
         Route::get('/create', '\App\Http\Controllers\Products\ProductController@create')->name('product.create');
-        Route::post('/store', '\App\Http\Controllers\Products\ProductController@store')->name('product.store');
-        Route::patch('/product/{product}', '\App\Http\Controllers\Products\ProductController@edit')->name('product.edit');
+        Route::post('/', '\App\Http\Controllers\Products\ProductController@store')->name('product.store');
+        Route::get('/edit/{product}', '\App\Http\Controllers\Products\ProductController@edit')->name('product.edit');
+        Route::patch('/product/{product}', \App\Http\Controllers\Products\UpdateController::class)->name('product.update');
         Route::delete('/delete/{product}', '\App\Http\Controllers\Products\ProductController@delete')->name('product.delete');
+        Route::post('/deleteImage', '\App\Http\Controllers\Products\ProductController@deleteImage')->name('product.deleteImage');
     });
 });

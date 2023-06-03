@@ -11,7 +11,7 @@ class StoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,12 +23,12 @@ class StoreRequest extends FormRequest
     {
         return [
             'cover' => 'required',
-            'images' => 'required',
+            'images' => 'required|array',
             'title' => 'required',
             'price' => 'required',
             'description' => 'required',
             'size' => 'required',
-            'category[]' => 'required|array',
+            'categories' => 'required|array',
         ];
     }
 
@@ -40,8 +40,7 @@ class StoreRequest extends FormRequest
             'title.required' => 'Поле должно быть заполнено!',
             'price.required' => 'Поле должно быть заполнено!',
             'description.required' => 'Поле должно быть заполнено!',
-            'size.required' => 'Поле должно быть заполнено!',
-            'category[].required' => 'Поле должно быть заполнено!'
+            'size.required' => 'Поле должно быть заполнено!'
         ];
     }
 }

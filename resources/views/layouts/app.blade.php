@@ -111,6 +111,9 @@
                                                      document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
+                            <a class="dropdown-item" href="{{ route('admin') }}">
+                                Admin
+                            </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
@@ -220,7 +223,7 @@
                 stroke-miterlimit="10" stroke="#F96D00" />
         </svg></div>
 
-
+    <script src="{{asset('assets/js/my.js')}}" defer></script>
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery-migrate-3.0.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>

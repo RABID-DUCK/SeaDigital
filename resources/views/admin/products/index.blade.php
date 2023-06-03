@@ -8,7 +8,6 @@
         <thead>
         <tr>
             <th scope="col">Обложка</th>
-            <th scope="col">Изображение</th>
             <th scope="col">Название</th>
             <th scope="col">Стоимость</th>
             <th scope="col">Описание</th>
@@ -18,13 +17,25 @@
         </thead>
         <tbody>
         @foreach($products as $product)
+
             <tr>
-                <td>{{$product->cover}}</td>
-                <td>{{$product->image}}</td>
-                <td><a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover text-decoration-none" href="{{route('$product.show', $product->id)}}">{{$product->title}}</a></td>
-                <td>{{$product->price}}</td>
+                <td><img src="http://seadigital/storage/app/public/storage{{$product->cover}}" alt="{{$product->title}}" width="100" height="70"></td>
+                <td><a class="link-primary text-decoration-none" href="{{route('product.show', $product->id)}}">{{$product->title}}</a></td>
+                <td>{{$product->price}}.руб</td>
                 <td>{{$product->description}}</td>
-                <td>{{$product->category}}</td>
+                <td>
+                    <table>
+                        <tbody>
+                        @foreach($product->categories as $item)
+                        <tr>
+                            <td>
+                                {{$item->title . ', '}}
+                            </td>
+                        </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </td>
                 <td>{{$product->size}}</td>
             </tr>
         @endforeach
