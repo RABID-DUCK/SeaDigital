@@ -21,3 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/products', function (){
    return \App\Models\Product::all();
 });
+
+Route::get('/product/{id}', function ($id){
+   return \App\Models\Product::query()->where('id', $id)->first();
+});

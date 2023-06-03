@@ -26,7 +26,7 @@
         </thead>
         <tbody>
         <tr>
-            <td><img src="http://seadigital/storage/app/public/{{$product->cover}}" alt="" width="100" height="70"></td>
+            <td><img src="{{asset('storage/'.$product->cover)}}" alt="" width="100" height="70"></td>
             <td>{{$product->title}}</td>
             <td>{{$product->price}}</td>
             <td>{{$product->description}}</td>

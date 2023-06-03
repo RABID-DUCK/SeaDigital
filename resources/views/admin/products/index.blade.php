@@ -19,7 +19,7 @@
         @foreach($products as $product)
 
             <tr>
-                <td><img src="http://seadigital/storage/app/public/storage{{$product->cover}}" alt="{{$product->title}}" width="100" height="70"></td>
+                <td><img src="{{asset('storage/'.$product->cover)}}" alt="{{$product->title}}" width="100" height="70"></td>
                 <td><a class="link-primary text-decoration-none" href="{{route('product.show', $product->id)}}">{{$product->title}}</a></td>
                 <td>{{$product->price}}.руб</td>
                 <td>{{$product->description}}</td>

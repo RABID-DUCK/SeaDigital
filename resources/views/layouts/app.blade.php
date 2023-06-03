@@ -72,8 +72,8 @@
                     <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
                     <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                    <li class="nav-item cta cta-colored"><a href="/cart" class="nav-link"><span
-                                class="icon-shopping_cart"></span>[0]</a></li>
+                    <li class="nav-item cta cta-colored">
+                        <a href="{{route('cart')}}" class="nav-link" id="countCart"><span class="icon-shopping_cart"></span></a></li>
 
                 </ul>
             </div>
