@@ -1,0 +1,14 @@
+.auth{
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+    margin: 0 auto;
+}
+.auth ul li:last-child{
+    margin-right: 10px;
+    text-decoration: none;
+    color: #000000;
+}
+.auth ul{
+    margin: 0 auto;
+}
