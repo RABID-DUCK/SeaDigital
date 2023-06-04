@@ -61,13 +61,16 @@ $('#countCart').append('[' + countCart + ']')
 
 // Добавление товара в корзину
 function addToCart(id, isSingle){
-    let qty = isSingle ? 1 : parseInt($('#quantity').val()) || 1;
 
-    let index = cart.findIndex(productInCart => productInCart.id === id);
 
     $.ajax({
         url: 'http://seadigital/public/api/product/'+id,
         success: function (res){
+            let qty = isSingle ? 1 : parseInt($('#quantity').val()) || 1;
+            console.log(cart)
+
+            let index = cart.findIndex(productInCart => productInCart.id === id);
+
             let newProduct = [
                 {
                     "id": res.id,
@@ -88,7 +91,7 @@ function addToCart(id, isSingle){
             localStorage.setItem('cart', JSON.stringify(cart));
             let count = cart.reduce((qty, product) => qty + product.qty, 0)
 
-            $('#countCart').replaceWith('<a href="http://seadigital/cart" class="nav-link" id="countCart"><span class="icon-shopping_cart"></span>'
+            $('#countCart').replaceWith('<a href="http://seadigital/public/cart" class="nav-link" id="countCart"><span class="icon-shopping_cart"></span>'
                 +'[' + count + ']'+'</a>')
         }
     })
