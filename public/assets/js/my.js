@@ -19,18 +19,18 @@ $('.delete-image').on('click', function (e){
 
 //Получение всех продуктов
 $.ajax({
-    url: '/api/products',
+    url: 'http://seadigital/public/api/products',
     type: 'GET',
     dataType: "json",
     success: function (data){
         $.each(data, function (index, product){
             let productHTML =  '<div class="col-sm col-md-6 col-lg"><div class="product">' +
                 '<a href="/product/'+product.id+'" class="img-prod">' +
-                '<img class="img-fluid" src="http://seadigital/storage/'+product.cover+'" alt="'+product.title+'">' +
+                '<img class="img-fluid" src="http://seadigital/public/storage/'+product.cover+'" alt="'+product.title+'">' +
                 '<div class="overlay"></div>' +
                 '</a>' +
                 '<div class="text py-3 px-3">' +
-                '<h3><a href="http://seadigital/product/'+product.id+'">'+product.title+'</a></h3>' +
+                '<h3><a href="http://seadigital/public/product/'+product.id+'">'+product.title+'</a></h3>' +
                 '<div class="d-flex">' +
                 '<div class="pricing">' +
                 '<p class="price"><span class="mr-2 price-dc">$'+product.price+'</span></p>' +
@@ -61,14 +61,12 @@ $('#countCart').append('[' + countCart + ']')
 
 // Добавление товара в корзину
 function addToCart(id, isSingle){
-    console.log(id);
     let qty = isSingle ? 1 : parseInt($('#quantity').val()) || 1;
-    console.log(qty);
 
     let index = cart.findIndex(productInCart => productInCart.id === id);
 
     $.ajax({
-        url: '/api/product/'+id,
+        url: 'http://seadigital/public/api/product/'+id,
         success: function (res){
             let newProduct = [
                 {
@@ -102,10 +100,14 @@ function removeProduct(id){
     let cart = JSON.parse(localStorage.getItem('cart'))
     cart.splice(id, 1);
     localStorage.setItem('cart', JSON.stringify(cart))
+
     let subtotal = cart.reduce((sum, product) => sum + product.price * product.qty, 0);
     $('#subtotal').replaceWith('<span id="subtotal">$'+subtotal+'</span>')
+
     let discount = $('#discount').text().replace("$", "");
-    $('#total').replaceWith('<span id="subtotal">$'+(subtotal-discount)+'</span>')
+    $('#total').replaceWith('<span id="total">$'+(subtotal-discount)+'</span>')
+    console.log($('#total'))
+
     $('#cartList tr:eq('+id+')').remove();
 }
 

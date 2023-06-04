@@ -41,7 +41,7 @@
                         <h3>Cart Totals</h3>
                         <p class="d-flex">
                             <span>Subtotal</span>
-                            <span id="subtotal">/span>
+                            <span id="subtotal"></span>
                         </p>
                         <p class="d-flex">
                             <span>Delivery</span>
@@ -114,7 +114,7 @@
             let subtotal = cart.reduce((sum, product) => sum + product.price * product.qty, 0);
             $('#subtotal').replaceWith('<span id="subtotal">$'+subtotal+'</span>')
             let discount = $('#discount').text().replace("$", "");
-            if(subtotal !== 0) $('#total').replaceWith('<span id="subtotal">$'+(subtotal-discount)+'</span>')
+            if(subtotal !== 0) $('#total').replaceWith('<span id="total">$'+(subtotal-discount)+'</span>')
 
         }
     </script>
