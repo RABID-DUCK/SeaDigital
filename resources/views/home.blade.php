@@ -16,6 +16,7 @@
                              data-scrollax=" properties: { translateY: '70%' }">
                             <div class="text">
                                 <span class="subheading">Winkel eCommerce Shop</span>
+
                                 <div class="horizontal">
                                     <h3 class="vr"
                                         style="background-image: url({{ asset('/assets/images/divider.jpg') }});">
@@ -32,7 +33,9 @@
                     </div>
                 </div>
             </div>
-
+            <form action="{{ route('our_backup_database') }}" method="get">
+                <button type="submit" class="btn btn-primary"> download</button>
+            </form>
             <div class="slider-item js-fullheight">
                 <div class="overlay"></div>
                 <div class="container-fluid p-0">
@@ -138,7 +141,39 @@
             </div>
         </div>
         <div class="container">
-            <div class="row" id="products">
+            <div class="row">
+                @foreach($products as $product)
+                <div class="col-sm col-md-6 col-lg"><div class="product">
+                        <a href="/product/{{$product->id}}" class="img-prod">
+                            <img class="img-fluid" src="http://seadigital/public/storage/{{$product->cover}}" alt="{{$product->title}}">
+                            <div class="overlay"></div>
+                            </a>
+                        <div class="text py-3 px-3">
+                            <h3><a href="http://seadigital/public/product/{{$product->id}}">{{$product->title}}</a></h3>
+                            <div class="d-flex">
+                                <div class="pricing">
+                                    <p class="price"><span class="mr-2 price-dc">{{$product->price}}</span></p>
+                                    </div>
+                                <div class="rating">
+                                    <p class="text-right">
+                                        <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                        <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                        <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                        <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                        <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                        </p>
+                                    </div>
+                                </div>
+                            <p class="bottom-area d-flex px-3">
+                                <a class="add-to-cart text-center py-2 mr-1 cursor-pointer" onclick="addToCart( {{$product->id}}, true )">
+                                    <span>Add to cart <i class="ion-ios-add ml-1"></i></span>
+                                </a>
+                                <a href="#" class="buy-now text-center py-2">Buy now<span><i class="ion-ios-cart ml-1"></i></span></a>
+                                </p>
+                            </div>
+                        </div>
+                </div>
+                @endforeach
             </div>
         </div>
     </section>

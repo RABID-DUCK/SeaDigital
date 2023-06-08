@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,8 +24,11 @@ Route::get('/cart', function (){
 
 Route::get('/product/{id}', '\App\Http\Controllers\Store\ProductController@index')->name('product');
 
+Route::get('/our_backup_database', '\App\Http\Controllers\ExportData@our_backup_database')->name('our_backup_database');
+
 Route::get('/shop', function (){
-    return view('shop');
+    $products = Product::all();
+    return view('shop', compact('products'));
 })->name('shop');
 
 Route::group(['prefix' => 'admin'], function () {

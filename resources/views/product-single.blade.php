@@ -17,8 +17,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 mb-5 ftco-animate">
-                    <a href="{{ asset('assets/images/menu-2.jpg') }}" class="image-popup"><img
-                            src="{{ asset('/storage/'.$product->cover) }}" class="img-fluid" alt="Colorlib Template"></a>
+                    <a href="{{ asset('assets/images/menu-2.jpg') }}" class="image-popup">
+                        <img src="{{ asset('/storage/'.$product->cover) }}" class="img-fluid" alt="Colorlib Template">
+                    </a>
                 </div>
                 <div class="col-lg-6 product-details pl-md-5 ftco-animate">
                     <h3>{{$product->title}}</h3>
@@ -56,7 +57,7 @@
                         <div class="w-100"></div>
                         <div class="input-group col-md-6 d-flex mb-3">
                             <span class="input-group-btn mr-2">
-                                <button type="button" class="quantity-left-minus btn" data-type="minus" data-field=">
+                                <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
                                     <i class="ion-ios-remove"></i>
                                 </button>
                             </span>
